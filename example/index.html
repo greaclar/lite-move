@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>liteMove</title>
+    <style>
+        #move {
+            width: 100px;
+            height: 100px;
+            background: #69c810;
+            cursor: move;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="move">
+        any dom moveable
+    </div>
+</body>
+<script src="../dist/lite-move.umd.js"></script>
+<script>
+    // liteMove.toMove() 返回监听mousedown事件的处理函数
+    document.querySelector('#move').addEventListener('mousedown', liteMove.toMove())
+</script>
+
+</html>

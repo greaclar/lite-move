@@ -1,0 +1,30 @@
+{
+  "name": "lite-move",
+  "version": "0.0.1",
+  "description": "a directive for moveable element which being able to run on vue2 and vue3. and it does not depense on position but use transform.",
+  "main": "dist/lite-move.umd.js",
+  "module": "dist/lite-move.mjs",
+  "typings": "dist/lite-move.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:watch": "vite build --watch",
+    "publish": "npm publish --registry https://registry.npmjs.org"
+  },
+  "keywords": [
+    "moveable",
+    "vue2/3 directive",
+    "transform"
+  ],
+  "author": "greaclar",
+  "license": "ISC",
+  "devDependencies": {
+    "terser": "^5.19.2",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.2",
+    "vite-plugin-dts": "^3.3.1",
+    "vue": "^3.3.4"
+  }
+}
