@@ -23,7 +23,8 @@
 <script src="../dist/lite-move.umd.js"></script>
 <script>
     // liteMove.toMove() 返回监听mousedown事件的处理函数
-    document.querySelector('#move').addEventListener('mousedown', liteMove.toMove())
+    const movableAction = liteMove.toMove();
+    document.querySelector('#move').addEventListener('mousedown', movableAction);
 </script>
 
 </html>
