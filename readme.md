@@ -3,6 +3,12 @@
 
 另外，兼容原生js、vue2、vue3！！
 
+# 安装
+
+```shell
+npm i lite-move --save
+```
+
 # 特点
 
 + 使用transform来实现元素的移动，性能更好
@@ -19,7 +25,7 @@ import { moveDirectivePlugin } from 'lite-move'
 app.use(moveDirectivePlugin).mount('#app')
 ```
 
-
+在vue3、vue2、原生js中使用示例如下：
 
 ## vue3
 
@@ -172,7 +178,8 @@ div {
 <script src="./dist/lite-move.umd.js"></script>
 <script>
     // liteMove.toMove() 返回监听mousedown事件的处理函数
-    document.querySelector('#move').addEventListener('mousedown', liteMove.toMove())
+    const movableAction = liteMove.toMove();
+    document.querySelector('#move').addEventListener('mousedown', movableAction);
 </script>
 
 </html>

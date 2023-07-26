@@ -1,6 +1,6 @@
 {
   "name": "lite-move",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "a directive for moveable element which being able to run on vue2 and vue3. and it does not depense on position but use transform.",
   "main": "dist/lite-move.umd.js",
   "module": "dist/lite-move.mjs",
@@ -8,6 +8,11 @@
   "files": [
     "dist"
   ],
+  "homepage": "https://github.com/greaclar/lite-move#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greaclar/lite-move.git"
+  },
   "scripts": {
     "build": "vite build",
     "build:watch": "vite build --watch",
