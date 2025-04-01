@@ -6,25 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>liteMove</title>
     <style>
-        #move {
+        .window {
             width: 100px;
             height: 100px;
-            background: #69c810;
+            background: #626362;
+        }
+        .top {
+            width: 100%;
+            height: 30px;
+            background-color: bisque;
             cursor: move;
         }
     </style>
 </head>
 
 <body>
-    <div id="move">
+    <div class="window">
+        <div class="top" ></div>
         any dom moveable
     </div>
 </body>
 <script src="../dist/lite-move.umd.js"></script>
 <script>
-    // liteMove.toMove() 返回监听mousedown事件的处理函数
-    const movableAction = liteMove.toMove();
-    document.querySelector('#move').addEventListener('mousedown', movableAction);
+    // liteMove.toMove() 返回监听mousedown事件的处理函数，true代表移动其父元素
+    const movableAction = liteMove.toMove(true);
+    document.querySelector('.top').addEventListener('mousedown', movableAction);
 </script>
 
 </html>

@@ -1,13 +1,16 @@
 <template>
-  <div ref="moveEle" v-move2>
-    <span>移动</span>
+  <div class="box move" v-move>
+    移动
+  </div>
+  <div class="box">
+    <div class="top move" v-move.moveParent>移动</div>
   </div>
 </template>
 
 <script setup lang='ts'>
 import { moveDirective } from 'lite-move';
 // 注册局部指令
-const vMove2 = moveDirective;
+const vMove = moveDirective;
 </script>
 
 <script lang="ts">
@@ -16,19 +19,28 @@ const vMove2 = moveDirective;
 import { moveDirective } from 'lite-move';
 export default {
   directives: {
-    // 在模板中启用 v-move2
-    move2: moveDirective
+    // 在模板中启用 v-move
+    move: moveDirective
   }
 }
  */
 </script>
 
 <style scoped lang='scss'>
-div {
+.move {
+  cursor: move;
+}
+
+.box {
   width: 100px;
   height: 100px;
   border: brown 3px solid;
   background-color: green;
-  cursor: move;
+}
+
+.top {
+  width: 100%;
+  height: 30px;
+  background-color: bisque;
 }
 </style>

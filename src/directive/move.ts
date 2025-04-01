@@ -1,12 +1,12 @@
 import type { App, Directive } from 'vue';
 type moveActionType = (e: MouseEvent) => void;
-type hooksType = (el: HTMLElement, binding: { value: moveActionType }) => void;
+type hooksType = (el: HTMLElement, binding: { value: moveActionType, modifiers: Record<string, unknown> }) => void;
 type vue2Directive = {
     inserted: hooksType
     unbind: hooksType
 }
 
-export const moveAction: () => (this: HTMLElement, e: MouseEvent) => void = () => {
+export const moveAction: (isMoveParentNode: Boolean) => (this: HTMLElement, e: MouseEvent) => void = (isMoveParentNode) => {
     let originX = 0; // 记录上次移动的距离
     let originY = 0;
 
@@ -22,7 +22,13 @@ export const moveAction: () => (this: HTMLElement, e: MouseEvent) => void = () =
             moveX = Math.floor(e.clientX - beginX + originX);
             moveY = Math.floor(e.clientY - beginY + originY);
 
-            this.style.transform = `translate(${moveX}px, ${moveY}px)`
+            const transform = `translate(${moveX}px, ${moveY}px)`;
+            
+            if (isMoveParentNode && this.parentNode?.nodeType === Node.ELEMENT_NODE) {
+                (this.parentNode as HTMLElement).style.transform = transform;
+                return;
+            }
+            this.style.transform = transform;
         }
 
         // 移除移动事件监听，移除监听移除移动的事件
@@ -50,11 +56,12 @@ export const moveAction: () => (this: HTMLElement, e: MouseEvent) => void = () =
 }
 
 const mounted: hooksType = (el, binding) => {
-    el.addEventListener('mousedown', binding.value = moveAction())
+    const isMoveParentNode = !!binding.modifiers.moveParent;
+    el.addEventListener('mousedown', binding.value = moveAction(isMoveParentNode));
 }
 
 const unmounted: hooksType = (el, binding) => {
-    el.removeEventListener('mousedown', binding.value)
+    el.removeEventListener('mousedown', binding.value);
 }
 
 export const vMove: Directive<HTMLElement, moveActionType> = {
@@ -69,14 +76,14 @@ export const vMoveFor2: vue2Directive = {
 
 export const movePlugin = {
     install(app: App) {
-        const version = app.version.charAt(0)
+        const version = app.version.charAt(0);
 
         if (version === '2') {
             // @ts-ignore
-            app.directive('move', vMoveFor2)
+            app.directive('move', vMoveFor2);
         }
         if (version === '3') {
-            app.directive('move', vMove)
+            app.directive('move', vMove);
         }
     }
 }
