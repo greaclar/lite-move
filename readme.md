@@ -52,8 +52,12 @@ app.use(moveDirectivePlugin).mount('#app')
 
 ```html
 <template>
-  <div ref="moveEle" v-move>
-    <span>移动</span>
+  <div class="box move" v-move>
+    移动
+  </div>
+  <div class="box">
+    <!-- moveParent修饰符：拖动时会让整个box一起移动 -->
+    <div class="top move" v-move.moveParent>移动</div>
   </div>
 </template>
 
@@ -69,20 +73,29 @@ const vMove = moveDirective;
 import { moveDirective } from 'lite-move';
 export default {
   directives: {
-    // 在模板中启用 v-move2
-    move2: moveDirective
+    // 在模板中启用 v-move
+    move: moveDirective
   }
 }
  */
 </script>
 
-<style scoped>
-div {
+<style scoped lang='scss'>
+.move {
+  cursor: move;
+}
+
+.box {
   width: 100px;
   height: 100px;
   border: brown 3px solid;
   background-color: green;
-  cursor: move;
+}
+
+.top {
+  width: 100%;
+  height: 30px;
+  background-color: bisque;
 }
 </style>
 ```
@@ -116,6 +129,7 @@ new Vue({
 
 ```html
 <template>
+    <!-- 同样支持moveParent修饰符 -->
     <div v-move>
         <span>{{ title }}</span>
     </div>
@@ -147,39 +161,50 @@ div {
 </style>
 ```
 
-
-
-
-
 ## 原生js
 
 在原生环境中，将拖动函数：`liteMove.toMove()`，注册为需要拖动dom元素的mousedown事件处理函数，即可让元素实现拖动。
 
 ```html
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>liteMove</title>
     <style>
-        #move {
+        .move {
+            cursor: move;
+        }
+
+        .box {
             width: 100px;
             height: 100px;
-            background: #69c810;
-            cursor: move;
+            border: brown 3px solid;
+            background-color: green;
+        }
+
+        .top {
+            width: 100%;
+            height: 30px;
+            background-color: bisque;
         }
     </style>
 </head>
 
 <body>
-    <div id="move">
-        any dom moveable
+    <div class="box move" v-move>
+        移动
+    </div>
+    <div class="box">
+        <div class="top move" v-move.moveParent>移动</div>
     </div>
 </body>
-<script src="./dist/lite-move.umd.js"></script>
+<script src="../dist/lite-move.umd.js"></script>
 <script>
-    // liteMove.toMove() 返回监听mousedown事件的处理函数
-    const movableAction = liteMove.toMove();
-    document.querySelector('#move').addEventListener('mousedown', movableAction);
+    // liteMove.toMove() 返回监听mousedown事件的处理函数，true代表移动其父元素，否则只移动自己
+    const movableAction = liteMove.toMove(true);
+    document.querySelector('.top').addEventListener('mousedown', movableAction);
+
+    const movableAction2 = liteMove.toMove();
+    document.querySelector('.move').addEventListener('mousedown', movableAction2);
 </script>
 
 </html>

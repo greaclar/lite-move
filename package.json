@@ -1,6 +1,6 @@
 {
   "name": "lite-move",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "a directive for moveable element which being able to run on vue2 and vue3. and it does not depense on position but use transform.",
   "main": "dist/lite-move.umd.js",
   "module": "dist/lite-move.mjs",

@@ -3,6 +3,7 @@
     移动
   </div>
   <div class="box">
+    <!-- 拖到move会让整个box一起移动 -->
     <div class="top move" v-move.moveParent>移动</div>
   </div>
 </template>
